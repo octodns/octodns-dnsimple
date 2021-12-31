@@ -1,5 +1,3 @@
-TODO: Review this README and add or modify as necessary.
-
 ## DnsimpleProvider provider for octoDNS
 
 An [octoDNS](https://github.com/octodns/octodns/) provider that targets [DnsimpleProvider](https://developer.dnsimple.com/v2/).
@@ -37,22 +35,25 @@ octodns_dnsimple==0.0.1
 ```yaml
 providers:
   dnsimple:
-      class: octodns_dnsimple.{PROVDER}
-      # TODO
+    class: octodns_dnsimple.DnsimpleProvider
+    # API v2 account access token (required)
+    token: letmein
+    # Your account number (required)
+    account: 42
+    # Use sandbox (optional)
+    sandbox: false
 ```
 
 ### Support Information
 
 #### Records
 
-TODO: All octoDNS record types are supported.
+All octoDNS record types are supported, there are some restrictions on CAA tags.
 
 #### Dynamic
 
-TODO: DnsimpleProvider does not support dynamic records.
+DnsimpleProvider does not support dynamic records.
 
 ### Developement
 
 See the [/script/](/script/) directory for some tools to help with the development process. They generally follow the [Script to rule them all](https://github.com/github/scripts-to-rule-them-all) pattern. Most useful is `./script/bootstrap` which will create a venv and install both the runtime and development related requirements. It will also hook up a pre-commit hook that covers most of what's run by CI.
-
-TODO: any provider specific setup, a docker compose to run things locally etc?

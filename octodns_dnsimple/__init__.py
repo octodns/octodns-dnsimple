@@ -84,18 +84,6 @@ class DnsimpleClient(object):
 
 
 class DnsimpleProvider(BaseProvider):
-    '''
-    Dnsimple provider using API v2
-
-    dnsimple:
-        class: octodns.provider.dnsimple.DnsimpleProvider
-        # API v2 account access token (required)
-        token: letmein
-        # Your account number (required)
-        account: 42
-        # Use sandbox (optional)
-        sandbox: true
-    '''
     SUPPORTS_GEO = False
     SUPPORTS_DYNAMIC = False
     SUPPORTS = set(('A', 'AAAA', 'ALIAS', 'CAA', 'CNAME', 'MX', 'NAPTR', 'NS',
