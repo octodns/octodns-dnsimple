@@ -27,13 +27,13 @@ setup(
     name='octodns-dnsimple',
     packages=('octodns_dnsimple',),
     python_requires='>=3.6',
-    install_requires=('octodns>=0.9.14', 'TODO: other requirements'),
+    install_requires=('octodns>=0.9.14', 'requests>=2.26.0'),
     url='https://github.com/octodns/octodns-dnsimple',
     version=version(),
     tests_require=[
         'mock>=4.0.3',
         'nose',
         'nose-no-network',
-        'TODO: other test-time requirements'
+        'requests_mock'
     ],
 )
