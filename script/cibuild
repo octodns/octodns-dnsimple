@@ -6,10 +6,6 @@ cd "$(dirname "$0")/.."
 echo "## bootstrap ###################################################################"
 script/bootstrap
 
-echo "## environment & versions ######################################################"
-python --version
-python -m pip --version
-
 if [ -z "$VENV_NAME" ]; then
     VENV_NAME="env"
 fi
@@ -31,4 +27,13 @@ echo "## tests/coverage ########################################################
 script/coverage
 echo "## validate setup.py build #####################################################"
 python setup.py build
+echo "## validate setup.py install ###################################################"
+deactivate
+TMP_DIR=$(mktemp -d -t ci-XXXXXXXXXX)
+python3 -m venv $TMP_DIR
+. "$TMP_DIR/bin/activate"
+python setup.py install
+echo "## validate tests can run against installed code ###############################"
+pip install pytest pytest-network requests_mock
+pytest --disable-network
 echo "## complete ####################################################################"
