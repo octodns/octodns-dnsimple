@@ -20,12 +20,12 @@ class DnsimpleClientException(ProviderException):
 
 class DnsimpleClientNotFound(DnsimpleClientException):
     def __init__(self):
-        super(DnsimpleClientNotFound, self).__init__('Not found')
+        super().__init__('Not found')
 
 
 class DnsimpleClientUnauthorized(DnsimpleClientException):
     def __init__(self):
-        super(DnsimpleClientUnauthorized, self).__init__('Unauthorized')
+        super().__init__('Unauthorized')
 
 
 class DnsimpleClient(object):
@@ -105,7 +105,7 @@ class DnsimpleProvider(BaseProvider):
     def __init__(self, id, token, account, sandbox=False, *args, **kwargs):
         self.log = logging.getLogger(f'DnsimpleProvider[{id}]')
         self.log.debug('__init__: id=%s, token=***, account=%s', id, account)
-        super(DnsimpleProvider, self).__init__(id, *args, **kwargs)
+        super().__init__(id, *args, **kwargs)
         self._client = DnsimpleClient(token, account, sandbox)
 
         self._zone_records = {}
@@ -317,7 +317,7 @@ class DnsimpleProvider(BaseProvider):
                 )
                 return False
 
-        return super(DnsimpleProvider, self).supports(record)
+        return super().supports(record)
 
     def _params_for_multiple(self, record):
         for value in record.values:
