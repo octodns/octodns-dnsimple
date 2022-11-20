@@ -138,7 +138,7 @@ class TestDnsimpleProvider(TestCase):
             )
 
     def test_apply(self):
-        provider = DnsimpleProvider('test', 'token', 42)
+        provider = DnsimpleProvider('test', 'token', 42, strict_supports=False)
 
         resp = Mock()
         resp.json = Mock()
