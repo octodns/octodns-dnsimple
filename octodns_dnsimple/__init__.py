@@ -9,6 +9,7 @@ from collections import defaultdict
 from requests import Session
 import logging
 
+from octodns import __VERSION__ as octodns_version
 from octodns.record import Record
 from octodns.provider import ProviderException
 from octodns.provider.base import BaseProvider
@@ -32,7 +33,12 @@ class DnsimpleClient(object):
     def __init__(self, token, account, sandbox):
         self.account = account
         sess = Session()
-        sess.headers.update({'Authorization': f'Bearer {token}'})
+        sess.headers.update(
+            {
+                'Authorization': f'Bearer {token}',
+                'User-Agent': f'octodns/{octodns_version} octodns-dnsimple/{__VERSION__}',
+            }
+        )
         self._sess = sess
         if sandbox:
             self.base = 'https://api.sandbox.dnsimple.com/v2/'
