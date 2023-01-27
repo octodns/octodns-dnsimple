@@ -8,8 +8,14 @@ from requests_mock import ANY, mock as requests_mock
 from unittest import TestCase
 from unittest.mock import Mock, call
 
+from octodns import __VERSION__ as octodns_version
 from octodns.record import Record
-from octodns_dnsimple import DnsimpleClientNotFound, DnsimpleProvider
+from octodns_dnsimple import (
+    DnsimpleClientNotFound,
+    DnsimpleProvider,
+    DnsimpleClient,
+    __VERSION__ as dnsimple_version,
+)
 from octodns.provider.yaml import YamlProvider
 from octodns.zone import Zone
 
@@ -289,3 +295,25 @@ class TestDnsimpleProvider(TestCase):
             ],
             any_order=True,
         )
+
+
+class TestDnsimpleClient(TestCase):
+    def test_request(self):
+        client = DnsimpleClient('token', 32, False)
+
+        # Request correctness
+        with requests_mock() as mock:
+            mock.get(
+                'https://api.dnsimple.com/v2/32/zones/unit.tests',
+                status_code=404,
+                text='Zone not found',
+            )
+
+            with self.assertRaises(Exception):
+                client.zone('unit.tests')
+
+            assert mock.last_request.headers['Authorization'] == 'Bearer token'
+            assert (
+                mock.last_request.headers['User-Agent']
+                == f'octodns/{octodns_version} octodns-dnsimple/{dnsimple_version}'
+            )
