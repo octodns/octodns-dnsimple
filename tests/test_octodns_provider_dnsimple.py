@@ -3,21 +3,24 @@
 #
 
 from os.path import dirname, join
-from requests import HTTPError
-from requests_mock import ANY, mock as requests_mock
 from unittest import TestCase
 from unittest.mock import Mock, call
 
+from requests import HTTPError
+from requests_mock import ANY
+from requests_mock import mock as requests_mock
+
 from octodns import __VERSION__ as octodns_version
+from octodns.provider.yaml import YamlProvider
 from octodns.record import Record
+from octodns.zone import Zone
+
+from octodns_dnsimple import __VERSION__ as dnsimple_version
 from octodns_dnsimple import (
+    DnsimpleClient,
     DnsimpleClientNotFound,
     DnsimpleProvider,
-    DnsimpleClient,
-    __VERSION__ as dnsimple_version,
 )
-from octodns.provider.yaml import YamlProvider
-from octodns.zone import Zone
 
 
 class TestDnsimpleProvider(TestCase):
@@ -43,7 +46,6 @@ class TestDnsimpleProvider(TestCase):
             break
 
     def test_populate(self):
-
         # Sandbox
         provider = DnsimpleProvider('test', 'token', 42, 'true')
         self.assertTrue('sandbox' in provider._client.base)
