@@ -17,6 +17,4 @@ fi
 export DNSIMPLE_ACCOUNT=
 export DNSIMPLE_TOKEN=
 
-export PYTHONPATH=.:$PYTHONPATH
-
 pytest --disable-network "$@"
