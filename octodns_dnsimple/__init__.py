@@ -63,6 +63,20 @@ class DnsimpleClient(object):
     def domain_create(self, name):
         return self._request('POST', '/domains', data={'name': name})
 
+    def zones(self):
+        ret = []
+
+        page = 1
+        while True:
+            data = self._request('GET', '/zones', {'page': page}).json()
+            ret += data['data']
+            pagination = data['pagination']
+            if page >= pagination['total_pages']:
+                break
+            page += 1
+
+        return ret
+
     def records(self, zone_name):
         ret = []
 
@@ -260,6 +274,9 @@ class DnsimpleProvider(BaseProvider):
                 return []
 
         return self._zone_records[zone.name]
+
+    def list_zones(self):
+        return [f'{z["name"]}.' for z in self._client.zones()]
 
     def populate(self, zone, target=False, lenient=False):
         self.log.debug(
