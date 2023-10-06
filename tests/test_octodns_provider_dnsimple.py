@@ -45,6 +45,46 @@ class TestDnsimpleProvider(TestCase):
             expected._remove_record(record)
             break
 
+    def test_list_zones(self):
+        # Sandbox
+        provider = DnsimpleProvider('test', 'token', 42, 'true')
+        self.assertTrue('sandbox' in provider._client.base)
+
+        provider = DnsimpleProvider('test', 'token', 42)
+        self.assertFalse('sandbox' in provider._client.base)
+
+        with requests_mock() as mock:
+            base = 'https://api.dnsimple.com/v2/42/zones?page='
+            mock.get(
+                f'{base}1',
+                json={
+                    'data': [{'name': 'first.com'}, {'name': 'second.com'}],
+                    'pagination': {
+                        'current_page': 1,
+                        'per_page': 2,
+                        'total_entries': 4,
+                        'total_pages': 2,
+                    },
+                },
+            )
+            mock.get(
+                f'{base}2',
+                json={
+                    'data': [{'name': 'third.com'}, {'name': 'fourth.com'}],
+                    'pagination': {
+                        'current_page': 2,
+                        'per_page': 2,
+                        'total_entries': 4,
+                        'total_pages': 2,
+                    },
+                },
+            )
+
+            self.assertEqual(
+                ['first.com.', 'second.com.', 'third.com.', 'fourth.com.'],
+                provider.list_zones(),
+            )
+
     def test_populate(self):
         # Sandbox
         provider = DnsimpleProvider('test', 'token', 42, 'true')
