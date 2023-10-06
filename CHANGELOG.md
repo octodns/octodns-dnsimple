@@ -1,4 +1,4 @@
-## v0.0.2 - 2023-??-?? - ???
+## v0.0.2 - 2023-10-06 - Know your zones
 
 * Suppoort for list_zones/dynamic zone config
 * Meaningful user-agent added to all requests
