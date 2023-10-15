@@ -233,7 +233,7 @@ class DnsimpleProvider(BaseProvider):
                 )
                 continue
 
-            target = f'{target}.' if target != "." else "."
+            target = f'{target}.' if target[-1] != '.' else target
 
             values.append(
                 {
