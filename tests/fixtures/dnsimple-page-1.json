@@ -85,7 +85,7 @@
       "zone_id": "unit.tests",
       "parent_id": null,
       "name": "_srv._tcp",
-      "content": "20 30 foo-1.unit.tests",
+      "content": "20 30 foo-1.unit.tests.",
       "ttl": 600,
       "priority": 10,
       "type": "SRV",
