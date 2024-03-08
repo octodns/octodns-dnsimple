@@ -33,7 +33,7 @@ class DnsimpleClientUnauthorized(DnsimpleClientException):
 
 class DnsimpleClient(object):
     def __init__(self, token, account, sandbox):
-        self.account = account
+        self.account = int(account)
         sess = Session()
         sess.headers.update(
             {
