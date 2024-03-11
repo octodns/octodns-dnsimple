@@ -1,6 +1,7 @@
-## v0.0.3 - 2023-??-?? - ???
+## v0.0.3 - 2024-03-11 - Format the types
 
 * Fix handling of SRV target trailing dot
+* Ensure account id is an int
 
 ## v0.0.2 - 2023-10-06 - Know your zones
 
