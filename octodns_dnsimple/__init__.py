@@ -48,7 +48,7 @@ class DnsimpleClient(object):
             self.base = 'https://api.dnsimple.com/v2/'
 
     def _request(self, method, path, params=None, data=None):
-        url = f'{self.base}{self.account}{path}'
+        url = f'{self.base}{self.account:d}{path}'
         resp = self._sess.request(method, url, params=params, json=data)
         if resp.status_code == 401:
             raise DnsimpleClientUnauthorized()
