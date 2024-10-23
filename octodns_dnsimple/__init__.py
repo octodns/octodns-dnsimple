@@ -117,7 +117,6 @@ class DnsimpleProvider(BaseProvider):
             'NAPTR',
             'NS',
             'PTR',
-            'SPF',
             'SRV',
             'SSHFP',
             'TXT',
@@ -141,7 +140,6 @@ class DnsimpleProvider(BaseProvider):
 
     _data_for_A = _data_for_multiple
     _data_for_AAAA = _data_for_multiple
-    _data_for_SPF = _data_for_multiple
 
     def _data_for_TXT(self, _type, records):
         return {
@@ -356,7 +354,6 @@ class DnsimpleProvider(BaseProvider):
     _params_for_A = _params_for_multiple
     _params_for_AAAA = _params_for_multiple
     _params_for_NS = _params_for_multiple
-    _params_for_SPF = _params_for_multiple
 
     def _params_for_TXT(self, record):
         for value in record.values:
