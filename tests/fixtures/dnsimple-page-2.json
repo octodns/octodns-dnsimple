@@ -113,22 +113,6 @@
       "updated_at": "2017-03-09T15:55:11Z"
     },
     {
-      "id": 11189900,
-      "zone_id": "unit.tests",
-      "parent_id": null,
-      "name": "spf",
-      "content": "v=spf1 ip4:192.168.0.1/16-all",
-      "ttl": 600,
-      "priority": null,
-      "type": "SPF",
-      "regions": [
-        "global"
-      ],
-      "system_record": false,
-      "created_at": "2017-03-09T15:55:11Z",
-      "updated_at": "2017-03-09T15:55:11Z"
-    },
-    {
       "id": 11189901,
       "zone_id": "unit.tests",
       "parent_id": null,

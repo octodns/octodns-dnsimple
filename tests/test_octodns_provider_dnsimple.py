@@ -42,7 +42,7 @@ class TestDnsimpleProvider(TestCase):
     )
     for record in list(expected.records):
         if record.name == 'sub' and record._type == 'NS':
-            expected._remove_record(record)
+            expected.remove_record(record)
             break
 
     def test_list_zones(self):
@@ -140,14 +140,14 @@ class TestDnsimpleProvider(TestCase):
 
             zone = Zone('unit.tests.', [])
             provider.populate(zone)
-            self.assertEqual(16, len(zone.records))
+            self.assertEqual(15, len(zone.records))
             changes = self.expected.changes(zone, provider)
             self.assertEqual(0, len(changes))
 
         # 2nd populate makes no network calls/all from cache
         again = Zone('unit.tests.', [])
         provider.populate(again)
-        self.assertEqual(16, len(again.records))
+        self.assertEqual(15, len(again.records))
 
         # bust the cache
         del provider._zone_records[zone.name]
@@ -274,7 +274,7 @@ class TestDnsimpleProvider(TestCase):
             ]
         )
         # expected number of total calls
-        self.assertEqual(28, provider._client._request.call_count)
+        self.assertEqual(27, provider._client._request.call_count)
 
         provider._client._request.reset_mock()
 
